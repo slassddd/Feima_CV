@@ -8,7 +8,7 @@ pathCalibData_2 = [pathFolder,image2Folder]; % 右相机
 fid=fopen([pathFolder,'FeiMa_TimeStamps.txt'],'w'); %写入文件路径
 for i = 1:nImage
     fprintf(fid,'%s\n',imageNames{i});
-end
+end 
 fclose(fid);
 %% 转换灰度图
 grayFolder = [pathFolder(1:end-1),'-gray\'];
