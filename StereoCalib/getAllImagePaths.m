@@ -15,17 +15,24 @@ nImage2 = length(imageStruct2);
 if nImage1 ~= nImage2
     fprintf('Image number of left and right is different,left %d,right %d\n',nImage1,nImage2); 
     return;
-else
-    fprintf('Image number is %d\n',nImage1);
 end
 imagePathNames1 = cell(nImage1,1);
 imagePathNames2 = imagePathNames1;
 imageFullNames = {imageStruct1.name}; % 包括文件类型
 dotIdx = strfind(imageFullNames,'.');
+nIm = 0;
 for i = 1:nImage1
     % 单纯文件名称，不含类型
-    imageNames{i} = imageFullNames{i}(1:dotIdx{i}-1);
+    if contains(imageFullNames{i},[".png"]) || ...
+            contains(imageFullNames{i},[".jpg"]) || ...
+            contains(imageFullNames{i},[".jpeg"])
+        nIm = nIm + 1;
+        imageNames{nIm} = imageFullNames{i}(1:dotIdx{i}-1);
+    end
 end
+fprintf('Image number is %d\n',nIm);
+nImage1 = nIm;
+nImage2 = nIm;
 for i = 1:nImage1
     imagePathNames1{i} = [imageStruct1(i).folder,'\',imageStruct1(i).name];
 end
